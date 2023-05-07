@@ -6,7 +6,9 @@
   "scripts": {
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/serverjs ",
-    "build": "tsup src --out-dir build"
+    "build": "tsup src --out-dir build",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "author": "",
   "license": "ISC",
@@ -17,7 +19,8 @@
     "prisma": "4.13.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "vitest": "0.31.0"
   },
   "dependencies": {
     "@prisma/client": "4.13.0",
