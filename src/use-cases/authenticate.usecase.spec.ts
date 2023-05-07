@@ -1,13 +1,17 @@
 import { AuthenticateUseCase } from './authenticate.usecase'
 import InMemoryUsersRepository from '../repositories/in-memory/in-memory-users.repository'
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 import InvalidCredentialsError from './errors/invalid-credentials.error'
 
-const repository = new InMemoryUsersRepository()
-const authUseCase = new AuthenticateUseCase(repository)
+let repository: InMemoryUsersRepository
+let authUseCase: AuthenticateUseCase
 
 describe('Auth UseCase unit tests', () => {
+  beforeEach(() => {
+    repository = new InMemoryUsersRepository()
+    authUseCase = new AuthenticateUseCase(repository)
+  })
   it('Should be able to authenticate', async () => {
     await repository.create({
       name: 'John Doe',
