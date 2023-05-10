@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 import { Gym, Prisma } from '@prisma/client'
 import IGymsRepository from '../gyms-repository.interface'
-import { Decimal } from '@prisma/client/runtime'
+
 export default class InMemoryGymsRepository implements IGymsRepository {
   public items: Gym[] = []
 
@@ -11,8 +11,8 @@ export default class InMemoryGymsRepository implements IGymsRepository {
       title: gymData.title,
       description: gymData.description ? gymData.description : null,
       phone: gymData.phone ? gymData.phone : null,
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: new Prisma.Decimal(gymData.latitude.toString()),
+      longitude: new Prisma.Decimal(gymData.longitude.toString()),
     }
     this.items.push(gym)
     return gym
