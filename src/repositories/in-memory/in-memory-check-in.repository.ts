@@ -39,4 +39,11 @@ export default class InMemoryCheckInRepository implements ICheckInRepository {
     }
     return checkIns
   }
+
+  async countByUserId(userId: string): Promise<number> {
+    const count = this.items.filter(
+      (checkIn) => checkIn.user_id === userId,
+    ).length
+    return count
+  }
 }
