@@ -14,6 +14,7 @@ describe('Get User Profile UseCase unit tests', () => {
   })
   it('Should be able to get user by id', async () => {
     await repository.create({
+      id: 'user1',
       name: 'John Doe',
       email: 'test@example.com',
       password_hash: await hash('testpassword', 6),
@@ -28,7 +29,7 @@ describe('Get User Profile UseCase unit tests', () => {
     expect(user.name).toEqual('John Doe')
   })
 
-  it('Should throw user id not found error when Id is not found', async () => {
+  it('Should throw user id not found error when Idis not found', async () => {
     await expect(() =>
       getUserProfileUseCase.execute({
         userId: 'user2',
