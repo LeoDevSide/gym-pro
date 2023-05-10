@@ -29,4 +29,14 @@ export default class InMemoryCheckInRepository implements ICheckInRepository {
     }
     return checkIn
   }
+
+  async findByUserIdCheckins(userId: string, page: number) {
+    const checkIns = this.items
+      .filter((checkIn) => checkIn.user_id === userId)
+      .slice((page - 1) * 20, page * 20)
+    if (checkIns.length === 0) {
+      return null
+    }
+    return checkIns
+  }
 }
