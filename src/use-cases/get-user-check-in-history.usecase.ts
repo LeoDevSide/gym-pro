@@ -12,11 +12,11 @@ type GetUserCheckinsOutputDto = {
 }
 
 export class GetUserCheckInsUseCase {
-  constructor(private usersRepository: ICheckInRepository) {}
+  constructor(private checkInsRepository: ICheckInRepository) {}
   async execute(
     input: GetUserCheckinsInputDto,
   ): Promise<GetUserCheckinsOutputDto> {
-    const checkIns = await this.usersRepository.findByUserIdCheckins(
+    const checkIns = await this.checkInsRepository.findByUserIdCheckins(
       input.userId,
       input.page,
     )
