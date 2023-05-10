@@ -43,15 +43,14 @@ describe('Get User Profile UseCase unit tests', () => {
       })
     }
     const { checkIns } = await getUserCheckInsUseCase.execute({
-      userId: 'user-1',
+      userId: 'user1',
       page: 2,
     })
-    expect(checkIns[0].gym_id).toEqual('gym1')
-    expect(checkIns[21].gym_id).toEqual('gym22')
+    expect(checkIns[0].gym_id).toEqual('gym21')
     expect(checkIns.length).toEqual(2)
   })
 
-  it('Should throw user id not found error when Idis not found', async () => {
+  it('Should throw user id not found error when Id not found', async () => {
     await expect(() =>
       getUserCheckInsUseCase.execute({
         userId: 'user322',
