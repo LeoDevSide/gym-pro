@@ -12,19 +12,17 @@ describe('Validate CheckIn Use Case', () => {
     checkInRepository = new InMemoryCheckInRepository()
     useCase = new ValidateCheckInUseCase(checkInRepository)
     vi.useFakeTimers()
-
-    checkInRepository.create({
-      gym_id: 'gym1',
-      user_id: 'user1',
-      id: 'checkIn1',
-    })
   })
   afterEach(() => {
     vi.useRealTimers()
   })
   it('should be able to validate check in', async () => {
     vi.setSystemTime(new Date(2023, 1, 1, 1, 1))
-
+    checkInRepository.create({
+      gym_id: 'gym1',
+      user_id: 'user1',
+      id: 'checkIn1',
+    })
     const { checkIn } = await useCase.execute({
       checkInId: 'checkIn1',
     })

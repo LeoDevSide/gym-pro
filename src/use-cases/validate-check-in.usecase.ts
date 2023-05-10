@@ -21,16 +21,21 @@ export default class ValidateCheckInUseCase {
     if (!checkIn) {
       throw new CheckInNotFoundError()
     }
+
     const now = new Date()
-    const checkInIsExpired =
+    const isToday =
       checkIn.created_at.getFullYear() === now.getFullYear() &&
       checkIn.created_at.getMonth() === now.getMonth() &&
       checkIn.created_at.getDay() === now.getDay() &&
-      now.getMinutes() - checkIn.created_at.getMinutes() >= 20
+      checkIn.created_at.getHours() === now.getHours()
+    const checkInIsExpired =
+      (isToday && now.getMinutes() - checkIn.created_at.getMinutes() >= 20) ||
+      !isToday
 
     if (checkInIsExpired) {
       throw new CheckInExpiredError()
     }
+
     checkIn.validated_at = now
     await this.checkInRepository.save(checkIn)
     return { checkIn }
