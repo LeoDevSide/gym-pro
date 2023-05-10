@@ -19,11 +19,17 @@ export default class InMemoryGymsRepository implements IGymsRepository {
   }
 
   async findById(id: string) {
-    console.log(id)
     const gym = this.items.find((item) => item.id === id)
     if (!gym) {
       return null
     }
     return gym
+  }
+
+  async searchManyByTitle(title: string, page: number) {
+    const gyms = this.items
+      .filter((gym) => gym.title.includes(title))
+      .slice((page - 1) * 20, page * 20)
+    return gyms
   }
 }
