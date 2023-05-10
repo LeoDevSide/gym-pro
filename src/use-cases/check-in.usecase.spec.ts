@@ -3,7 +3,6 @@ import InMemoryCheckInRepository from '../repositories/in-memory/in-memory-check
 import CheckInUseCase from './check-in.usecase'
 import UserAlreadyCheckInTodayError from './errors/already-check-in-today-error'
 import InMemoryGymsRepository from '../repositories/in-memory/in-memory.gyms.repository'
-import { Decimal } from '@prisma/client/runtime'
 import UserIsNotFarError from './errors/user-is-not-far'
 
 let checkInRepository: InMemoryCheckInRepository
@@ -17,13 +16,13 @@ describe('CheckIn Use Case', () => {
     checkInUsecase = new CheckInUseCase(checkInRepository, gymsRepository)
     vi.useFakeTimers()
 
-    gymsRepository.items.push({
+    gymsRepository.create({
       id: 'gym1',
       title: 'gym title',
       description: 'a',
       phone: 'a',
-      latitude: new Decimal(0),
-      longitude: new Decimal(0),
+      latitude: 0,
+      longitude: 0,
     })
   })
   afterEach(() => {
@@ -64,13 +63,13 @@ describe('CheckIn Use Case', () => {
   it('should not be able to check-in from a distant loc', async () => {
     vi.setSystemTime(new Date(2023, 1, 2, 1, 1))
 
-    gymsRepository.items.push({
+    gymsRepository.create({
       id: 'gym2',
       title: 'gym title',
       description: 'a',
       phone: 'a',
-      latitude: new Decimal(-23.4227649),
-      longitude: new Decimal(-46.4660058),
+      latitude: -23.4227649,
+      longitude: -46.4660058,
     })
 
     await expect(() =>
