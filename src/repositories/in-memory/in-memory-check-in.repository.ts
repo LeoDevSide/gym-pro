@@ -5,7 +5,7 @@ export default class InMemoryCheckInRepository implements ICheckInRepository {
   public items: CheckIn[] = []
   async create(checkInData: Prisma.CheckInUncheckedCreateInput) {
     const checkIn = {
-      id: randomUUID(),
+      id: checkInData.id ?? randomUUID(),
       created_at: new Date(),
       validated_at: checkInData.validated_at ? new Date() : null,
       user_id: checkInData.user_id,
@@ -45,5 +45,21 @@ export default class InMemoryCheckInRepository implements ICheckInRepository {
       (checkIn) => checkIn.user_id === userId,
     ).length
     return count
+  }
+
+  async findByCheckInId(checkInId: string) {
+    const checkIn = this.items.find((checkIn) => checkIn.id === checkInId)
+    if (!checkIn) {
+      return null
+    }
+    return checkIn
+  }
+
+  async save(checkIn: CheckIn): Promise<CheckIn> {
+    const checkInIndex = this.items.findIndex((item) => item.id === checkIn.id)
+    if (checkInIndex >= 0) {
+      this.items[checkInIndex] = checkIn
+    } // findIndex returns -1 when not found
+    return this.items[checkInIndex]
   }
 }
