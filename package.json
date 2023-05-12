@@ -7,9 +7,11 @@
     "start:dev": "tsx watch src/server.ts",
     "start": "node build/serverjs ",
     "build": "tsup src --out-dir build",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:coverage": "vitest --coverage"
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest --dir src/use-cases",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "vitest run --dir src/http",
+    "pretest:e2e": "npm link ./prisma/vitest-environment-prisma && npm link vitest-environment-prisma"
   },
   "author": "",
   "license": "ISC",
@@ -18,7 +20,7 @@
     "@types/node": "20.1.0",
     "@vitest/coverage-c8": "0.31.0",
     "eslint": "8.40.0",
-    "prisma": "4.13.0",
+    "prisma": "4.14.0",
     "tsup": "6.7.0",
     "tsx": "3.12.7",
     "typescript": "5.0.4",
@@ -26,9 +28,10 @@
   },
   "dependencies": {
     "@fastify/jwt": "6.7.1",
-    "@prisma/client": "4.13.0",
+    "@prisma/client": "4.14.0",
     "@types/bcryptjs": "2.4.2",
     "bcryptjs": "2.4.3",
+    "dotenv": "16.0.3",
     "fastify": "4.17.0",
     "zod": "3.21.4"
   }
