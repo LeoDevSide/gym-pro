@@ -23,7 +23,6 @@ describe('authenticate controller [e2e] ', () => {
         password: 'randompass',
       })
       .set('accept', 'application/json')
-    console.log(body)
     expect(statusCode).toBe(200)
     expect(body).toEqual({
       token: expect.any(String),
