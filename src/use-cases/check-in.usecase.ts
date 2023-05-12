@@ -30,7 +30,6 @@ export default class CheckInUseCase {
   }
 
   async execute(input: CheckInInputDto): Promise<CheckInOutputDto> {
-    console.log(input)
     const gym = await this.gymsRepository.findById(input.gymId)
     if (!gym) {
       throw new GymIdNotFoundError()
