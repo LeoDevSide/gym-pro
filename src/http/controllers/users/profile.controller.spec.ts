@@ -1,6 +1,7 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { agent } from 'supertest'
 import { app } from '../../../app'
+import createAndAuthRandomUser from '../../../use-cases/utils/test/create-and-auth-user'
 
 describe('profile controller [e2e] ', () => {
   beforeAll(async () => {
@@ -10,23 +11,10 @@ describe('profile controller [e2e] ', () => {
     await app.close()
   })
   it('should be able to get user profile from authenticated user', async () => {
-    const registerResponse = await agent(app.server).post('/users').send({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: 'randompass',
-    })
-    expect(registerResponse.statusCode).toBe(201)
-    const authResponse = await agent(app.server).post('/sessions').send({
-      email: 'johndoe@example.com',
-      password: 'randompass',
-    })
-    expect(authResponse.statusCode).toBe(200)
-    expect(authResponse.body).toEqual({
-      token: expect.any(String),
-    })
+    const token = await createAndAuthRandomUser(app)
     const profileResponse = await agent(app.server)
       .get('/me')
-      .set('Authorization', `Bearer ${authResponse.body.token}`)
+      .set('Authorization', `Bearer ${token}`)
     expect(profileResponse.statusCode).toEqual(200)
     expect(profileResponse.body.user.id).toBeDefined()
     expect(profileResponse.body.user.name).toEqual('John Doe')
