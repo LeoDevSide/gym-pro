@@ -4,10 +4,10 @@ import GetUserCheckInsUseCaseFactory from '../../../use-cases/factories/get-user
 
 export async function history(request: FastifyRequest, reply: FastifyReply) {
   const getUserCheckInsQuerySchema = z.object({
-    page: z.coerce.number().default(1),
+    page: z.coerce.number().min(1).default(1),
   })
 
-  const { page } = getUserCheckInsQuerySchema.parse(request.body)
+  const { page } = getUserCheckInsQuerySchema.parse(request.query)
 
   try {
     const getUserCheckInsUseCase = GetUserCheckInsUseCaseFactory.create()
