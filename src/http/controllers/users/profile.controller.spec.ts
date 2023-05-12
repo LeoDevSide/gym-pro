@@ -11,10 +11,10 @@ describe('profile controller [e2e] ', () => {
     await app.close()
   })
   it('should be able to get user profile from authenticated user', async () => {
-    const token = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(app)
     const profileResponse = await agent(app.server)
       .get('/me')
-      .set('Authorization', `Bearer ${token}`)
+      .set('Authorization', `Bearer ${userCreated.token}`)
     expect(profileResponse.statusCode).toEqual(200)
     expect(profileResponse.body.user.id).toBeDefined()
     expect(profileResponse.body.user.name).toEqual('John Doe')
