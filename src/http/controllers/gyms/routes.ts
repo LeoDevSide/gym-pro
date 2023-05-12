@@ -7,7 +7,7 @@ import { verifyJWT } from '../../middlewares/verify-jwt'
 export async function gymRoutes(app: FastifyInstance) {
   app.addHook('onRequest', verifyJWT)
   app.get('/gyms/search', search)
-  app.post('/gyms/neargyms', getNear)
+  app.get('/gyms/neargyms', getNear)
 
   // Only Authenticated users
   app.post('/gyms', createGym)

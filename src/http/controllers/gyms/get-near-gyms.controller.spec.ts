@@ -23,12 +23,13 @@ describe('Get near gyms controller [e2e] ', () => {
         phone: null,
       })
     const fetchNearGyms = await agent(app.server)
-      .post('/gyms/neargyms')
+      .get('/gyms/neargyms')
       .set('Authorization', `Bearer ${userCreated.token}`)
-      .send({
-        userLatitude: 1,
-        userLongitude: 2.2224,
+      .query({
+        latitude: 1,
+        longitude: 2.2224,
       })
+      .send()
     expect(fetchNearGyms.statusCode).toBe(200)
     expect(fetchNearGyms.body.gyms.length).toBe(1)
   })
@@ -46,12 +47,14 @@ describe('Get near gyms controller [e2e] ', () => {
         phone: null,
       })
     const fetchNearGyms = await agent(app.server)
-      .post('/gyms/neargyms')
-      .set('Authorization', `Bearer ${userCreated.token}`)
-      .send({
-        userLatitude: 1,
-        userLongitude: 3.2224,
+      .get('/gyms/neargyms')
+      .query({
+        latitude: 1,
+        longitude: 3,
       })
+      .set('Authorization', `Bearer ${userCreated.token}`)
+
+      .send()
     expect(fetchNearGyms.statusCode).toBe(200)
     expect(fetchNearGyms.body.gyms.length).toBe(0)
   })
