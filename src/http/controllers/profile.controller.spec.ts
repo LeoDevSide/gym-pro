@@ -20,7 +20,6 @@ describe('profile controller [e2e] ', () => {
       email: 'johndoe@example.com',
       password: 'randompass',
     })
-    console.log(authResponse.body.token)
     expect(authResponse.statusCode).toBe(200)
     expect(authResponse.body).toEqual({
       token: expect.any(String),
