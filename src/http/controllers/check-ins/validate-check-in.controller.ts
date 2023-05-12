@@ -4,7 +4,7 @@ import ValidateCheckInUseCaseFactory from '../../../use-cases/factories/validate
 
 export async function validate(request: FastifyRequest, reply: FastifyReply) {
   const getUserCheckInsParamsSchema = z.object({
-    checkInId: z.string().uuid(),
+    checkInId: z.coerce.string().uuid(),
   })
 
   const { checkInId } = getUserCheckInsParamsSchema.parse(request.params)
