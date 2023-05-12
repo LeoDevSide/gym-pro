@@ -26,7 +26,6 @@ export async function authenticateUser(
         },
       },
     )
-    console.log(token)
     return reply.status(200).send({ token })
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
