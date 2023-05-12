@@ -4,7 +4,7 @@ import { PrismaCheckInsRepository } from '../../repositories/prisma/prisma-check
 import PrismaGymsRepository from '../../repositories/prisma/prisma-gyms.repository'
 import CheckInUseCase from '../check-in.usecase'
 
-export default class RegisterUseCaseFactory {
+export default class CheeckInUseCaseFactory {
   static create() {
     const checkInsRepository: ICheckInRepository =
       new PrismaCheckInsRepository()
