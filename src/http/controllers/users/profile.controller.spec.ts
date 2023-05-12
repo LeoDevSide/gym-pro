@@ -1,6 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { agent } from 'supertest'
-import { app } from '../../app'
+import { app } from '../../../app'
 
 describe('profile controller [e2e] ', () => {
   beforeAll(async () => {

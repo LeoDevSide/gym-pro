@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify'
-import GetUserProfileeUseCaseFactory from '../../use-cases/factories/get-user-profile.usecase.factory'
+import GetUserProfileeUseCaseFactory from '../../../use-cases/factories/get-user-profile.usecase.factory'
 
 export async function profile(request: FastifyRequest, reply: FastifyReply) {
   const getUserProfile = GetUserProfileeUseCaseFactory.create()
