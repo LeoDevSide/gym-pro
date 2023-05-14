@@ -5,12 +5,20 @@ import { env } from './env'
 import fastifyJwt from '@fastify/jwt'
 import { gymRoutes } from './http/controllers/gyms/routes'
 import { checkInRoutes } from './http/controllers/check-ins/routes'
+import { fastifyCookie } from '@fastify/cookie'
 
 export const app = fastify()
+
 app.register(checkInRoutes)
 app.register(userRoutes)
 app.register(gymRoutes)
-app.register(fastifyJwt, { secret: env.JWT_SECRET })
+app.register(fastifyCookie)
+app.register(fastifyJwt, {
+  secret: env.JWT_SECRET,
+  sign: {
+    expiresIn: '10m',
+  },
+})
 app.setErrorHandler((error, _, reply) => {
   if (error instanceof ZodError) {
     return reply
