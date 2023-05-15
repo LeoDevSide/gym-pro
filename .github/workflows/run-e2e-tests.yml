@@ -29,5 +29,5 @@ jobs:
 
       - run: npm run test:e2e
         env:
-          JWT_SECRET: carbonara
+          JWT_SECRET: "carbonara"
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apigym?schema=public"
