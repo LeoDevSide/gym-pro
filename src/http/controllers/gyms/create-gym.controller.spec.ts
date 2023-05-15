@@ -11,7 +11,7 @@ describe('Register controller [e2e] ', () => {
     await app.close()
   })
   it('should be create a new gym', async () => {
-    const userCreated = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(app, true)
 
     const response = await agent(app.server)
       .post('/gyms')

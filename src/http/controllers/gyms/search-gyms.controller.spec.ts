@@ -11,7 +11,7 @@ describe('Search gyms controller [e2e] ', () => {
     await app.close()
   })
   it('should be able to get gyms with search string in title', async () => {
-    const userCreated = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(app, true)
     await agent(app.server)
       .post('/gyms')
       .set('Authorization', `Bearer ${userCreated.token}`)

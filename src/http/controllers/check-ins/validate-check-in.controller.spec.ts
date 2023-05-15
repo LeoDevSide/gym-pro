@@ -12,7 +12,7 @@ describe('Get User History CheckIn controller [e2e] ', () => {
     await app.close()
   })
   it('should be able to validate check in from a uuser', async () => {
-    const userCreated = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(app, true)
 
     const createGym = await prisma.gym.create({
       data: {

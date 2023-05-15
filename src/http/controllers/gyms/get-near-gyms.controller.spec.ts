@@ -11,7 +11,7 @@ describe('Get near gyms controller [e2e] ', () => {
     await app.close()
   })
   it('should be get a created near gyms in 10km from user loc', async () => {
-    const userCreated = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(app, true)
     await agent(app.server)
       .post('/gyms')
       .set('Authorization', `Bearer ${userCreated.token}`)
@@ -34,7 +34,11 @@ describe('Get near gyms controller [e2e] ', () => {
     expect(fetchNearGyms.body.gyms.length).toBe(1)
   })
   it('not should get created near gyms in more than 10km from user loc', async () => {
-    const userCreated = await createAndAuthRandomUser(app)
+    const userCreated = await createAndAuthRandomUser(
+      app,
+      true,
+      'test2@gmail.com',
+    )
 
     await agent(app.server)
       .post('/gyms')

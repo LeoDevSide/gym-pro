@@ -18,7 +18,7 @@ describe('profile controller [e2e] ', () => {
     expect(profileResponse.statusCode).toEqual(200)
     expect(profileResponse.body.user.id).toBeDefined()
     expect(profileResponse.body.user.name).toEqual('John Doe')
-    expect(profileResponse.body.user.email).toEqual('johndoe@example.com')
+    expect(profileResponse.body.user.email).toEqual('admin@example.com')
     expect(profileResponse.body.user.created_at).toBeDefined()
   })
 })
